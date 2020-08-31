@@ -1,0 +1,34 @@
+bins = (2, 6.5, 8)
+group_names = ['bad', 'good']
+wine['quality'] = pd.cut(wine['quality'], bins = bins, labels = group_names)
+
+n_estimators=200
+
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from sklearn.linear_model import SGDClassifier
+from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
+%matplotlib inline
+
+
+rfc_eval = cross_val_score(estimator = rfc, X = X_train, y = y_train, cv = 10)
+rfc_eval.mean()
+
+
+
+
+quality = df["quality"].values
+category = []
+for num in quality:
+    if num<5:
+        category.append("Bad")
+    elif num>6:
+        category.append("Good")
+    else:
+        category.append("Mid")

@@ -1,0 +1,53 @@
+import pandas as pd
+from sklearn import linear_model
+from sklearn.ensemble import RandomForestClassifier,GradientBoostingClassifier
+from sklearn.model_selection import GridSearchCV
+from sklearn import metrics
+
+xtrain = pd.read_csv("/data/training/wine_train.csv", header = 0)
+xtest = pd.read_csv("/data/test/wine_test.csv", header = 0)
+xval = pd.read_csv("/data/test/wine_test.csv", header = 0)
+
+
+#Write your code here
+X_train = xtrain.drop('quality',axis=1)
+y_train = xtrain['quality']
+X_test = xtest.drop(['id','quality'],axis=1)
+y_test = xtest['quality']
+wine_id = xtest['id']
+
+X_val = xval.drop(['id','quality'],axis=1)
+y_val = xval['quality']
+
+#lr = linear_model.LogisticRegression()
+#lr.fit(X_train,y_train)
+#y_pred = lr.predict(X_test)
+
+rf = RandomForestClassifier(n_estimators=500)
+#param = {
+#    'n_estimators': [400,500],
+#     'max_depth' : [4,8],
+#}
+#grid_rf = GridSearchCV(estimator=rf, param_grid=param)
+#grid_rf.fit(X_val, y_val)
+
+rf.fit(X_train, y_train)
+y_pred = rf.predict(X_test)
+
+acc = metrics.accuracy_score(y_test,y_pred)
+print (acc)
+
+
+category = []
+for num in y_pred:
+    if num < 6:
+        category.append("bad")
+    elif num > 6:
+        category.append("good")
+    else:
+        category.append("normal")
+
+finalOutput = pd.DataFrame({'id': wine_id,'taste': category})
+
+finalOutput.columns = ['id', 'taste']
+finalOutput.to_csv("/code/wine_prediction.csv", index = False)

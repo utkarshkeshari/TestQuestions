@@ -1,0 +1,37 @@
+# Import libraries here
+# import numpy as np
+# from sklearn import linear_model
+import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+# [Example] Read datasets
+# iris_train = pd.read_csv("/data/training/iris_train.csv")
+
+# User can save any number of plots to `/code/output` directory
+# Note that only the plots saved in /code/output will be visible to you
+# So make sure you save each plot as shown below
+# Uncomment the below 3 lines and give it a try
+# axes = pd.tools.plotting.scatter_matrix(iris_train, alpha=0.2)
+# plt.tight_layout()
+# plt.savefig('/code/output/scatter_matrix.png')
+
+# Write output file
+# Assuming iris_pred is DataFrame in the required output format
+# iris_pred.to_csv("/code/iris_prediction.csv")
+
+
+
+
+
+Instructions to be followed
+
+Read the training dataset
+Train the K-Nearest Neighbour  model to predict output for given data
+You are restricted to use K-Nearest Neighbour only.
+Read the test data set from the given location
+Predict the output for test dataset
+You should assign the class 1 if the output probability of prediction is greater than 0.5 else 0 (use ifelse).
+Output the prediction with respect to each id given in test dataset.
+The final output file should contain only two columns one for Id and other prediction and should be named as 'Id' and 'Occupancy'
